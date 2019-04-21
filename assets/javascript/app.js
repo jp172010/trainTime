@@ -17,16 +17,8 @@ $("#submit").on("click", function(event){
     var fTrain = moment($("#firstTrainForm").val().trim(), "hh:mm a").format("X");
     var frequency = $("#frequencyForm").val().trim();
     var fTrainMin = moment().diff(moment(fTrain, "X"), "minutes");
+    console.log(fTrainMin)
     var minAway = frequency - fTrainMin;
-    if (minAway < 1){
-        moment().add(1440, "minutes").fTrainMin;
-        minAway = frequency - fTrainMin;
-    };
-    if(minAway > frequency){
-        minAway = fTrainMin * -1;
-    };
-
-
 
     var newTrain = {
         name: name,
