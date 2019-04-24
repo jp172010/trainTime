@@ -18,7 +18,12 @@ $("#submit").on("click", function(event){
     var frequency = $("#frequencyForm").val().trim();
     var fTrainMin = moment().diff(moment(fTrain, "X"), "minutes");
     console.log(fTrainMin)
-    var minAway = frequency - fTrainMin;
+    if(fTrainMin < 0){
+        fTrainMin = fTrainMin * -1;
+    }else{
+        fTrainMin = (fTrainMin * -1) + 1440;
+    };
+    var minAway = fTrainMin;
 
     var newTrain = {
         name: name,
@@ -36,6 +41,8 @@ database.ref().on("child_added",function(childSnapshot){
     var destination = childSnapshot.val().destination;
     var minAway = childSnapshot.val().minAway;
     var nextTrain = moment().add(minAway, "minutes").format("LLL");
+
+    
 
     function createTrain(){
         return `
